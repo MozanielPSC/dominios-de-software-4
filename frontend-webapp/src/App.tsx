@@ -1,12 +1,17 @@
-import { useState } from 'react'
+import { ThemeProvider } from '@emotion/react'
+import { createTheme, CssBaseline } from '@mui/material';
+import { AppRoutes } from './AppRoutes';
+
+const theme = createTheme();
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-     </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppRoutes />
+    </ThemeProvider>
+     
   )
 }
 
