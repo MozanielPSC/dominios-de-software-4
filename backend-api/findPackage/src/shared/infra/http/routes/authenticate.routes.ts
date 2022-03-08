@@ -1,0 +1,13 @@
+import { Router } from "express";
+import { AuthenticateUserController } from "../../../../modules/accounts/useCases/authenticateUser/AuthenticateUserController";
+import { GetUserInfoController } from "../../../../modules/accounts/useCases/getUserInfo/GetUserInfoController";
+import { RefreshTokenController } from "../../../../modules/accounts/useCases/refreshToken/RefreshTokenController";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+const authenticateRoutes = Router();
+const authenticateUserController = new AuthenticateUserController();
+const refreshTokenController = new RefreshTokenController();
+const getUserInfoController = new GetUserInfoController();
+authenticateRoutes.post("/sessions", authenticateUserController.handle);
+authenticateRoutes.post("/refresh-token",refreshTokenController.handle);
+authenticateRoutes.get("/me",ensureAuthenticated,getUserInfoController.handle);
+export { authenticateRoutes };
