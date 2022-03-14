@@ -4,7 +4,6 @@ export const Content = styled.div`
   padding: 10px 10px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 `
 
 export const Title = styled.h1`
