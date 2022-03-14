@@ -1,5 +1,5 @@
-import { Box, Button, Container, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-import { Inbox, Mail } from '@mui/icons-material'
+import { Inbox, Mail, Menu } from '@mui/icons-material';
+import { Box, Button, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useState } from "react";
 
 
@@ -42,7 +42,7 @@ export function Sidebar() {
 
   return (
     <>
-      <Button onClick={toggleSidebar(true)}>Open</Button>
+      <Button onClick={toggleSidebar(true)}><Menu/></Button>
       <Drawer
         anchor='left'
         open={isSidebarShowing}

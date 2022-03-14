@@ -1,5 +1,4 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { Box, Container } from '@mui/material';
 
 export const ContainerTest = styled(Container)`
@@ -8,7 +7,7 @@ export const ContainerTest = styled(Container)`
   max-height: 100vh;
 `
 
-export const FormBox = styled(Box)`
+export const FormContainer = styled(Box)`
   background-color: #f5f5f5;
   min-height: 100vh;
   width: 100%;
