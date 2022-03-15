@@ -2,16 +2,19 @@ import { Button, Grid, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Map from '../../components/Map';
 import { Sidebar } from "../../components/SideBar";
+import { useLocationInfo } from '../../hooks/location';
 import { ContainerTest, FormContainer, MapBox } from "./style";
 
 type Inputs = {
-  example: string,
-  exampleRequired: string,
+  city: string,
+  state: string,
 };
+
 
 export function Dashboard() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  const { location } = useLocationInfo()
 
 
   return (
@@ -35,19 +38,20 @@ export function Dashboard() {
         >
           <Grid item xs={6} >
             <TextField
-              label="Example Required"
+              label="Cidade"
               variant="filled"
-              {...register("exampleRequired")}
-              required
-              error={errors.exampleRequired ? true : false}
+              {...register("city")}
+              error={errors.city ? true : false}
+              value={location.city}
             />
           </Grid>
           <Grid item xs={6} >
             <TextField
-              label="Example"
-              {...register("exampleRequired")}
+              label="Estado"
+              {...register("state")}
               variant="filled"
-              error={errors.example ? true : false}
+              error={errors.state ? true : false}
+              value={location.principalSubdivision}
             />
           </Grid>
           <Grid item xs={12} display="flex" justifyContent="right">

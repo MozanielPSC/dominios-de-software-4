@@ -1,5 +1,9 @@
-import LeafLet from 'leaflet'
-import { MapContainer, Marker, TileLayer } from 'react-leaflet'
+import { CircularProgress } from '@mui/material';
+import LeafLet from 'leaflet';
+import { useEffect, useState } from 'react';
+import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
+import { useLocationInfo } from '../../hooks/location';
+import { geo_loc_api } from '../../service';
 
 const markerIcon = LeafLet.icon({
   iconUrl:
@@ -11,23 +15,73 @@ const markerIcon = LeafLet.icon({
   iconSize: [40, 40]
 })
 
-function Map() {
-  return (
-    <MapContainer
-      center={[-16.6111727, -49.2740144]} 
-      zoom={15}
-      style={{
-        width: '100%',
-        height: '100%'
-      }}
-    >
-      <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-      <Marker
-        icon={markerIcon}
-        position={[-16.6111727, -49.2740144]}
-      />
-    </MapContainer>
+interface LocationInfo {
+  countryName: string;
+  city: string;
+  principalSubdivision: string;
+}
+
+
+function Map() {
+  const [initialPosition, setInitialPosition] = useState<[number, number]>([-16.6111694, -49.2713811]);
+  const [markerPosition, setMarkerPosition] = useState<[number, number]>([0, 0]);
+  const { setLocationInfo } = useLocationInfo();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+      setInitialPosition([latitude, longitude]);
+
+    });
+  }, []);
+
+  const LocationMarker = () => {
+
+    const map = useMapEvents({
+      click(e) {
+        setMarkerPosition([
+          e.latlng.lat,
+          e.latlng.lng
+        ]);
+        const response = fetch(`${geo_loc_api}${e.latlng.lat}&longitude=${e.latlng.lng}&localityLanguage=pt`, { method: 'GET' })
+          .then(res => res.json())
+        response.then(r => setLocationInfo(r as LocationInfo))
+      }
+    })
+
+    return (
+      markerPosition ?
+        <Marker
+          icon={markerIcon}
+          key={markerPosition[0]}
+          position={markerPosition}
+          interactive={false}
+        />
+        : null
+    )
+  }
+
+  return (
+    <>
+      {
+        initialPosition[0] !== 0 ? (
+          <MapContainer
+            center={markerPosition || initialPosition}
+            zoom={12}
+            style={{
+              width: '100%',
+              height: '100%'
+            }}
+          >
+            <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+            <LocationMarker />
+          </MapContainer>
+        ) : <CircularProgress />
+      }
+    </>
   )
 }
 
