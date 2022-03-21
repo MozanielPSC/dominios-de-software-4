@@ -18,6 +18,8 @@ interface IResponse {
     email: string,
     avatar: string,
     isAdmin: boolean,
+    isEnterprise:boolean,
+    isDriver:boolean,
     id: string,
   };
   token: string;
@@ -83,6 +85,8 @@ class AuthenticateUserUseCase {
         email: user.email,
         avatar: avatarVerify,
         isAdmin: user.isAdmin,
+        isDriver:user.isDriver,
+        isEnterprise:user.isEnterprise,
         id: user.id,
       },
       refresh_token

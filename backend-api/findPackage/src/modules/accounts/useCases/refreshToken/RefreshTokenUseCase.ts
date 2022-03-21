@@ -15,6 +15,8 @@ interface ITokenResponse {
     username: string,
     avatar: string,
     isAdmin: boolean,
+    isDriver: boolean,
+    isEnterprise: boolean,
     id: string,
   };
   token: string;
@@ -68,6 +70,8 @@ class RefreshTokenUseCase {
         username: userFinal.username,
         avatar: userFinal.avatar,
         isAdmin: userFinal.isAdmin,
+        isDriver: userFinal.isDriver,
+        isEnterprise: userFinal.isEnterprise,
         id: userFinal.id,
       }
     };

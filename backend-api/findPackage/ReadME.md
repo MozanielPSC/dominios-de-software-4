@@ -5,7 +5,7 @@
 Descrição: criação de usuário.
 
 ```
- POST "/users/"
+ POST /users/
 
  Request Body
 
@@ -19,7 +19,7 @@ Descrição: criação de usuário.
 ## AUTH ROUTES
 Descrição: Autenticar usuário.
 
-POST "/sessions/
+POST /sessions/
 Request Body
 ```
 {
@@ -46,7 +46,7 @@ Response
 
 Descrição: Refresh Token.
 
-POST "/refresh-token/
+POST /refresh-token/
 Pode ser passado pelos headers ou pelo body
 
 Request Body
@@ -73,7 +73,7 @@ Response
 ```
 Descrição: Informações do usuário, necessita estar autenticado (Token no header).
 
-POST "/me
+POST /me
 
 Response
 ```
@@ -96,7 +96,7 @@ Descrição: Cadastra uma nova rota, precisa estar autenticado em uma conta Ente
 
 POST /routes
 
-Request BODY
+Request Body
 
 ```
 {
@@ -162,11 +162,11 @@ Response
 
 # PATHS ROUTES
 
-Descrição: Seleciona as rotas pelo id do motorista.
+Descrição: Cria uma parada.
 
 POST /paths
 
-REQUEST BODY
+Request Body
 
 ```
 {
@@ -195,6 +195,30 @@ Response
         "isFinal":number,
         "created_at":date
     }
+}
+```
+
+Descrição: Seleciona as paradas pelo id da rota.
+
+GET /paths/byRoute/:route_id
+
+Response
+
+```
+{
+    [
+        {
+            "id":string,
+            "route_id" :"string",
+            "initLat":number,
+            "finalLat":number,
+            "initLong":number,
+            "finalLong":number,
+            "isInitial":number,
+            "isFinal":number,
+            "created_at":date
+        }
+    ]
 }
 ```
 

@@ -7,6 +7,8 @@ interface IResponse {
         email: string,
         avatar: string,
         isAdmin: boolean,
+        isEnterprise:boolean,
+        isDriver:boolean,
         id: string,
     }
 }
@@ -38,6 +40,8 @@ class GetUserInfoUseCase {
                 email: user.email,
                 avatar: user.avatar,
                 isAdmin: user.isAdmin,
+                isEnterprise:user.isEnterprise,
+                isDriver:user.isDriver,
                 id: user.id,
               }
         }
