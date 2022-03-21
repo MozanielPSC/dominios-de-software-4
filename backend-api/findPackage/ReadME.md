@@ -26,9 +26,9 @@ Request Body
     "email": "string",
     "password":  "string"
 }
-
+```
 Response
-
+```
 {
       token:string,
       user: {
