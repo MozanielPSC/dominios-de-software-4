@@ -13,7 +13,7 @@ const getRouteByDriverIdController = new GetRouteByDriverIdController();
 const getRouteByIdController = new GetRouteByIdController();
 const getRouteByEnterpriseIdController = new GetRouteByEnterpriseIdController()
 routesRoutes.post("/",ensureAuthenticated,ensureEnterprise,createRouteController.handle);
-routesRoutes.get("/",ensureAuthenticated,getRouteByIdController.handle)
+routesRoutes.get("/:route_id",ensureAuthenticated,getRouteByIdController.handle)
 routesRoutes.get("/byDriver/:driver_id",ensureAuthenticated,getRouteByDriverIdController.handle);
 routesRoutes.get("/byEnterprise/:enterprise_id",ensureAuthenticated,getRouteByEnterpriseIdController.handle);
 
