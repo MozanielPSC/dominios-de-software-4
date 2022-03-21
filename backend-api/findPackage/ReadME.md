@@ -54,9 +54,9 @@ Request Body
 {
     "token": "string",
 }
-
+```
 Response
-
+```
 {
       token:string,
       user: {
