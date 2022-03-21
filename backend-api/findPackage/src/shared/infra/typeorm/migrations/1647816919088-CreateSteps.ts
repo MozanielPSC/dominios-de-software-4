@@ -56,7 +56,7 @@ export class CreateSteps1647816919088 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("paths")
+        await queryRunner.dropTable("paths");
     }
 
 }

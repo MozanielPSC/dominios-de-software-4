@@ -1,0 +1,4 @@
+class DeletePathController{
+    
+}
+export{DeletePathController}

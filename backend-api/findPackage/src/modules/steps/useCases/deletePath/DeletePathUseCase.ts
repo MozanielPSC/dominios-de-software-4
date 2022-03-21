@@ -1,0 +1,4 @@
+class DeletePathUseCase{
+    
+}
+export{DeletePathUseCase}
