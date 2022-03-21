@@ -16,10 +16,10 @@ class UserTokens {
   expires_date: Date;
   @CreateDateColumn()
   created_at: Date;
-constructor(){
-  if(!this.id){
-    this.id = uuidv4();
+  constructor() {
+    if (!this.id) {
+      this.id = uuidv4();
+    }
   }
-}
 }
 export { UserTokens }
