@@ -8,9 +8,12 @@ class PathsRepository implements IPathsRepository {
   constructor() {
     this.repository = getRepository(Paths);
   }
-
-
-  async create({ route_id,
+  async deleteById(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+  
+  async create({
+    route_id,
     initLat,
     finalLat,
     initLong,
@@ -26,7 +29,8 @@ class PathsRepository implements IPathsRepository {
       finalLong,
       id,
       isFinal,
-      isInitial
+      isInitial,
+      route_id
     });
     await this.repository.save(path);
     return path;

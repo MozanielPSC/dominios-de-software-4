@@ -76,8 +76,6 @@ class RefreshTokenUseCase {
       }
     };
 
-
-
   }
 }
 export { RefreshTokenUseCase }

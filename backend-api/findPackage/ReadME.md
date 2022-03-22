@@ -11,8 +11,23 @@ Descrição: criação de usuário.
 
 {
     username:string,
-    email":string,
+    email:string,
     password:string
+}
+```
+Descrição: tornar usuário Motorista.
+
+PATCH /users/turnDriver/:user_id
+
+Response
+
+```
+{
+    username:string,
+    email:string,
+    isAdmin: boolean,
+    isEnterprise:boolean,
+    isDriver:boolean
 }
 ```
 
@@ -23,8 +38,8 @@ POST /sessions/
 Request Body
 ```
 {
-    "email": "string",
-    "password":  "string"
+    email: string,
+    password:  string
 }
 ```
 Response
@@ -52,7 +67,7 @@ Pode ser passado pelos headers ou pelo body
 Request Body
 ```
 {
-    "token": "string",
+    token: string,
 }
 ```
 Response
@@ -100,16 +115,16 @@ Request Body
 
 ```
 {
-    "driver_id": "string",
+    driver_id: string,
 }
 ```
 Response
 
 ```
 {
-    "id":"string"
-    "driver_id": "string",
-    "enterprise_id":"string"
+    id:string
+    driver_id: string,
+    enterprise_id:string
 }
 ```
 Descrição: Selecionar um rota por id, precisa estar autenticado.
@@ -120,9 +135,9 @@ Response
 
 ```
 {
-    "id":"string"
-    "driver_id": "string",
-    "enterprise_id":"string"
+    id:string
+    driver_id: string,
+    enterprise_id:string
 }
 ```
 Descrição: Seleciona as rotas pelo id da empresa.
@@ -135,9 +150,9 @@ Response
 {
     [
         {
-        "id":"string"
-        "driver_id": "string",
-        "enterprise_id":"string"
+        id:string
+        driver_id: string,
+        enterprise_id:string
         }
     ]
 }
@@ -152,12 +167,21 @@ Response
 {
     [
         {
-        "id":"string"
-        "driver_id": "string",
-        "enterprise_id":"string"
+        id:string
+        driver_id: string,
+        enterprise_id:string
         }
     ]
 }
+```
+Descrição: Deleta uma rota pelo id.
+
+DELETE /routes/:route_id
+
+Response
+
+```
+Status: 200
 ```
 
 # PATHS ROUTES
@@ -170,13 +194,13 @@ Request Body
 
 ```
 {
-    "route_id" :"string",
-    "initLat":number,
-    "finalLat":number,
-    "initLong":number,
-    "finalLong":number,
-    "isInitial":number,
-    "isFinal":number
+    route_id :string,
+    initLat:number,
+    finalLat:number,
+    initLong:number,
+    finalLong:number,
+    isInitial:number,
+    isFinal:number
 }
 ```
 
@@ -185,15 +209,15 @@ Response
 ```
 {
     {
-        "id":string,
-        "route_id" :"string",
-        "initLat":number,
-        "finalLat":number,
-        "initLong":number,
-        "finalLong":number,
-        "isInitial":number,
-        "isFinal":number,
-        "created_at":date
+        id:string,
+        route_id :string,
+        initLat:number,
+        finalLat:number,
+        initLong:number,
+        finalLong:number,
+        isInitial:number,
+        isFinal:number,
+        created_at:date
     }
 }
 ```
@@ -208,19 +232,66 @@ Response
 {
     [
         {
-            "id":string,
-            "route_id" :"string",
-            "initLat":number,
-            "finalLat":number,
-            "initLong":number,
-            "finalLong":number,
-            "isInitial":number,
-            "isFinal":number,
-            "created_at":date
+            id:string,
+            route_id :string,
+            initLat:number,
+            finalLat:number,
+            initLong:number,
+            finalLong:number,
+            isInitial:number,
+            isFinal:number,
+            created_at:date
+        }
+    ]
+}
+```
+Descrição: Altera uma parada.
+
+PATCH /paths/
+
+Request Body
+
+```
+{
+    [
+        {
+            id:string,
+            route_id :string,
+            initLat:number,
+            finalLat:number,
+            initLong:number,
+            finalLong:number,
+            isInitial:number,
+            isFinal:number
+        }
+    ]
+}
+```
+Response
+
+```
+{
+    [
+        {
+            id:string,
+            route_id :string,
+            initLat:number,
+            finalLat:number,
+            initLong:number,
+            finalLong:number,
+            isInitial:number,
+            isFinal:number,
+            created_at:date
         }
     ]
 }
 ```
 
+Descrição: Deleta uma parada pelo id da rota.
 
+DELETE /paths/:path_id
 
+Response
+```
+Status: 200
+```

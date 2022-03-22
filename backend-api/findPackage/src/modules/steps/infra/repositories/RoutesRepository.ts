@@ -36,7 +36,9 @@ class RoutesRepository implements IRoutesRepository {
         const routeVerify = await this.repository.findOne(id);
         return routeVerify;
     }
-
+    async deleteById(id: string): Promise<void> {
+        await this.repository.delete(id);
+    }
 }
 
 export { RoutesRepository };
