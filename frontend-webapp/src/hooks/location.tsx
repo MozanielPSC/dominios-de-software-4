@@ -5,6 +5,8 @@ interface LocationInfo {
   countryName: string;
   city: string;
   principalSubdivision: string;
+  lat: number;
+  long: number
 }
 
 

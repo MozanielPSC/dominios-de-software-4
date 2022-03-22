@@ -1,11 +1,15 @@
 import React from 'react';
+import { AuthProvider } from './auth';
 import { LocationProvider } from './location';
 
 const AppProvider: React.FC = ({ children }) => {
   return (
-    <LocationProvider>
-      {children}
-    </LocationProvider>
+    <AuthProvider>
+      <LocationProvider>
+        {children}
+      </LocationProvider>
+    </AuthProvider>
+
   );
 };
 
