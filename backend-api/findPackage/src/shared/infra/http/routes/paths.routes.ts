@@ -15,4 +15,5 @@ pathsRoutes.post("/",ensureAuthenticated,ensureEnterprise,createPathController.h
 pathsRoutes.get("/byRoute/:route_id",getPathsByRouteIdController.handle);
 pathsRoutes.patch("/",ensureAuthenticated,ensureEnterprise,updatePathController.handle);
 pathsRoutes.delete("/:path_id",ensureAuthenticated,ensureEnterprise,deletePathController.handle)
+
 export { pathsRoutes };
