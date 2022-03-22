@@ -5,6 +5,7 @@ interface IPathsRepository{
     create(data:ICreatePathDTO):Promise<Paths>;
     findByRouteId(route_id:string):Promise<Paths[]>;
     findById(id: string):Promise<Paths>;
+    deleteById(id: string): Promise<void>
 }
 
 export{IPathsRepository}
