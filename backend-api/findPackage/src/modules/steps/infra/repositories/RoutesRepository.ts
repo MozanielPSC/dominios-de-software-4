@@ -14,11 +14,17 @@ class RoutesRepository implements IRoutesRepository {
         driver_id,
         enterprise_id,
         id,
+        expectedEnd,
+        isFinished,
+        initialDate
     }: ICreateRouteDTO): Promise<Routes> {
         const route = this.repository.create({
             driver_id,
             enterprise_id,
             id,
+            expectedEnd,
+            isFinished,
+            initialDate
         });
         await this.repository.save(route);
         return route;
