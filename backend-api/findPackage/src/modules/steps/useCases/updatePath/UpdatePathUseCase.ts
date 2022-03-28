@@ -10,7 +10,10 @@ interface IRequest {
     finalLong: number,
     id: string,
     isInitial: boolean,
-    isFinal: boolean
+    isFinal: boolean,
+    city_name: string,
+    state: string,
+    isComplete: boolean
 }
 @injectable()
 class UpdatePathUseCase {
@@ -24,7 +27,10 @@ class UpdatePathUseCase {
         finalLong,
         id,
         isInitial,
-        isFinal }: IRequest) {
+        isFinal,
+        city_name,
+        state,
+        isComplete }: IRequest) {
         const pathVerify = await this.pathsRepository.findById(id);
         if (!pathVerify) {
             throw new AppError("Path does not exist");
@@ -36,6 +42,9 @@ class UpdatePathUseCase {
         pathVerify.initLong = initLong;
         pathVerify.isFinal = isFinal;
         pathVerify.isInitial = isInitial;
+        pathVerify.city_name = city_name;
+        pathVerify.state = state;
+        pathVerify.isComplete = isComplete;
         await this.pathsRepository.create(pathVerify);
         return pathVerify;
     }

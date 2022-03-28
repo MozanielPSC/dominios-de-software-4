@@ -17,7 +17,9 @@ class CreatePathUseCase {
         initLong,
         finalLong,
         isInitial,
-        isFinal
+        isFinal,
+        city_name,
+        state
     }: ICreatePathDTO) {
         const verifyRoute = await this.routesRepository.findById(route_id);
         if (!verifyRoute) {
@@ -34,7 +36,9 @@ class CreatePathUseCase {
             initLong,
             finalLong,
             isInitial,
-            isFinal
+            isFinal,
+            city_name,
+            state
         })
         return path;
     }

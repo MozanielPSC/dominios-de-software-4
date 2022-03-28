@@ -116,6 +116,8 @@ Request Body
 ```
 {
     driver_id: string,
+    initialDate: Date,
+    expectedEnd?:Date,
 }
 ```
 Response
@@ -124,7 +126,38 @@ Response
 {
     id:string
     driver_id: string,
-    enterprise_id:string
+    enterprise_id:string,
+    initialDate: Date,
+    expectedEnd?:Date,
+    isFinished:boolean
+
+}
+```
+Descrição: Atualiza uma rota pelo id, precisa estar autenticado em uma conta Enterprise.
+
+POST /routes/:route_id
+
+Request Body
+
+```
+{
+    driver_id: string,
+    initialDate: Date,
+    expectedEnd?:Date,
+    isFinished:boolean
+}
+```
+Response
+
+```
+{
+    id:string
+    driver_id: string,
+    enterprise_id:string,
+    initialDate: Date,
+    expectedEnd?:Date,
+    isFinished:boolean
+
 }
 ```
 Descrição: Selecionar um rota por id, precisa estar autenticado.
@@ -137,7 +170,10 @@ Response
 {
     id:string
     driver_id: string,
-    enterprise_id:string
+    enterprise_id:string,
+    initialDate: Date,
+    expectedEnd?:Date,
+    isFinished:boolean
 }
 ```
 Descrição: Seleciona as rotas pelo id da empresa.
@@ -150,9 +186,12 @@ Response
 {
     [
         {
-        id:string
-        driver_id: string,
-        enterprise_id:string
+            id:string
+            driver_id: string,
+            enterprise_id:string,
+            initialDate: Date,
+            expectedEnd?:Date,
+            isFinished:boolean
         }
     ]
 }
@@ -167,9 +206,12 @@ Response
 {
     [
         {
-        id:string
-        driver_id: string,
-        enterprise_id:string
+            id:string
+            driver_id: string,
+            enterprise_id:string,
+            initialDate: Date,
+            expectedEnd?:Date,
+            isFinished:boolean
         }
     ]
 }
@@ -200,7 +242,10 @@ Request Body
     initLong:number,
     finalLong:number,
     isInitial:number,
-    isFinal:number
+    isFinal:number,
+    isComplete:boolean,
+    city_name:string,
+    state:string
 }
 ```
 
@@ -217,7 +262,10 @@ Response
         finalLong:number,
         isInitial:number,
         isFinal:number,
-        created_at:date
+        created_at:date,
+        isComplete:boolean,
+        city_name:string,
+        state:string
     }
 }
 ```
@@ -240,7 +288,10 @@ Response
             finalLong:number,
             isInitial:number,
             isFinal:number,
-            created_at:date
+            created_at:date,
+            isComplete:boolean,
+            city_name:string,
+            state:string
         }
     ]
 }
@@ -262,7 +313,10 @@ Request Body
             initLong:number,
             finalLong:number,
             isInitial:number,
-            isFinal:number
+            isFinal:number,
+            isComplete:boolean,
+            city_name:string,
+            state:string
         }
     ]
 }
@@ -281,7 +335,10 @@ Response
             finalLong:number,
             isInitial:number,
             isFinal:number,
-            created_at:date
+            created_at:date,
+            isComplete:boolean,
+            city_name:string,
+            state:string
         }
     ]
 }
