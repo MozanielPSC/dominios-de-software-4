@@ -22,7 +22,7 @@ class CreateRouteUseCase{
         const route =await this.routesRepository.create({
             driver_id,
             enterprise_id,
-            initialDate,
+            initialDate: new Date(initialDate),
             expectedEnd
         })
 

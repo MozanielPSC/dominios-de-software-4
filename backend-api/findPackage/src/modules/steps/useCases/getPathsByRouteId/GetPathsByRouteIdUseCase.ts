@@ -3,7 +3,7 @@ import { AppError } from "../../../../shared/errors/AppError";
 import { IPathsRepository } from "../../repositories/IPathsRepository";
 import { IRoutesRepository } from "../../repositories/IRoutesRepository";
 
-injectable()
+@injectable()
 class GetPathsByRouteIdUseCase{
     constructor(
         @inject("RoutesRepository") private routesRepository: IRoutesRepository,
