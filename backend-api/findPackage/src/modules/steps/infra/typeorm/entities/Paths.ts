@@ -26,6 +26,12 @@ class Paths {
     isInitial: boolean;
     @Column()
     isFinal: boolean;
+    @Column()
+    city_name: string;
+    @Column()
+    state: string;
+    @Column()
+    isComplete: boolean;
     @CreateDateColumn()
     created_at: Date;
 

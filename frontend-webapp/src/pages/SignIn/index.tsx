@@ -1,16 +1,24 @@
-import { Copyright } from "@mui/icons-material";
-import { Grid, CssBaseline, Paper, Box, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import testImg from './assets/singin_img.svg'
-import { LockClockOutlined } from '@mui/icons-material'
+import { Copyright, LockClockOutlined } from "@mui/icons-material";
+import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Paper, TextField, Typography } from "@mui/material";
+import { useCallback, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 export function SignIn(){
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation()
 
-
-  function handleSubmit(){
-    navigate('/dashboard', {replace: true})
-  }
+  const {signIn} = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  
+  const handleSubmit = useCallback(async () => {
+    await signIn({
+      email: email,
+      password: password
+    })
+    navigate('/dashboard')
+  }, [signIn, email, password, navigate])
 
   return(
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -45,7 +53,7 @@ export function SignIn(){
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <Box component="div" sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -55,6 +63,7 @@ export function SignIn(){
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -65,16 +74,18 @@ export function SignIn(){
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>

@@ -36,6 +36,10 @@ class UsersRepository implements IUsersRepository {
     return userVerify;
   }
 
+  async findAll(): Promise<User[]> {
+    const userVerify = await this.repository.find();
+    return userVerify;
+  }
 }
 
 export { UsersRepository };

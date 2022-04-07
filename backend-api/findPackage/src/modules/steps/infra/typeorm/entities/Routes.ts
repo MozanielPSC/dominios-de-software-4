@@ -13,6 +13,12 @@ class Routes {
     driver_id: string;
     @Column()
     enterprise_id: string;
+    @Column()
+    initialDate: Date;
+    @Column()
+    expectedEnd:Date;
+    @Column()
+    isFinished:boolean;
     @CreateDateColumn()
     created_at: Date;
 

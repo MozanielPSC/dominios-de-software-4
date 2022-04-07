@@ -20,7 +20,10 @@ class PathsRepository implements IPathsRepository {
     finalLong,
     id,
     isInitial,
-    isFinal
+    isFinal,
+    isComplete,
+    city_name,
+    state
   }: ICreatePathDTO): Promise<Paths> {
     const path = this.repository.create({
       initLat,
@@ -30,7 +33,10 @@ class PathsRepository implements IPathsRepository {
       id,
       isFinal,
       isInitial,
-      route_id
+      route_id,
+      isComplete,
+      city_name,
+      state
     });
     await this.repository.save(path);
     return path;

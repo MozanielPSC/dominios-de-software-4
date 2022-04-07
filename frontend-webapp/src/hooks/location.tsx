@@ -1,12 +1,13 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
 
-interface LocationInfo {
+export interface LocationInfo {
   countryName: string;
   city: string;
   principalSubdivision: string;
+  latitude: number;
+  longitude: number;
 }
-
 
 interface LocationContextData {
   location: LocationInfo;
@@ -21,6 +22,7 @@ const LocationProvider: React.FC = ({ children }) => {
   const setLocationInfo = useCallback((location: LocationInfo) => {
     setData(location);
   }, []);
+
 
   return (
     <LocationContext.Provider

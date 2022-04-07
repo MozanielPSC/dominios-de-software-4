@@ -4,7 +4,9 @@ import { CreateRouteController } from "../../../../modules/steps/useCases/create
 import { DeleteRouteController } from "../../../../modules/steps/useCases/deleteRoute/DeleteRouteController";
 import { GetRouteByDriverIdController } from "../../../../modules/steps/useCases/getRouteByDriverId/GetRouteByDriverIdController";
 import { GetRouteByIdController } from "../../../../modules/steps/useCases/getRouteById/GetRouteByIdController";
+import { GetAllRoutesController } from "../../../../modules/steps/useCases/getAllRoutes/GetAllRoutesController";
 import { GetRouteByEnterpriseIdController } from "../../../../modules/steps/useCases/getRoutesByEnterpriseId/GetRouteByEnterpriseIdController";
+import { UpdateRouteController } from "../../../../modules/steps/useCases/updateRoute/UpdateRouteController";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import { ensureEnterprise } from "../middlewares/ensureEnterprise";
 
@@ -12,12 +14,17 @@ const routesRoutes = Router();
 const createRouteController = new CreateRouteController();
 const getRouteByDriverIdController = new GetRouteByDriverIdController();
 const getRouteByIdController = new GetRouteByIdController();
+const getAllRoutesController = new GetAllRoutesController();
 const getRouteByEnterpriseIdController = new GetRouteByEnterpriseIdController();
 const deleteRouteController = new DeleteRouteController();
-routesRoutes.post("/",ensureAuthenticated,ensureEnterprise,createRouteController.handle);
-routesRoutes.get("/:route_id",ensureAuthenticated,getRouteByIdController.handle)
-routesRoutes.get("/byDriver/:driver_id",ensureAuthenticated,getRouteByDriverIdController.handle);
-routesRoutes.get("/byEnterprise/:enterprise_id",ensureAuthenticated,getRouteByEnterpriseIdController.handle);
-routesRoutes.delete("/:route_id",ensureAuthenticated,ensureEnterprise,deleteRouteController.handle);
+const updateRouteController = new UpdateRouteController();
 
-export{routesRoutes}
+routesRoutes.post("/", ensureAuthenticated, ensureEnterprise, createRouteController.handle);
+routesRoutes.get("/:route_id", ensureAuthenticated, getRouteByIdController.handle)
+routesRoutes.get("/routes/all", ensureAuthenticated, getAllRoutesController.handle)
+routesRoutes.get("/byDriver/:driver_id", ensureAuthenticated, getRouteByDriverIdController.handle);
+routesRoutes.get("/byEnterprise/:enterprise_id", ensureAuthenticated, getRouteByEnterpriseIdController.handle);
+routesRoutes.delete("/:route_id", ensureAuthenticated, ensureEnterprise, deleteRouteController.handle);
+routesRoutes.patch("/:route_id", ensureAuthenticated, ensureEnterprise, updateRouteController.handle)
+
+export { routesRoutes }

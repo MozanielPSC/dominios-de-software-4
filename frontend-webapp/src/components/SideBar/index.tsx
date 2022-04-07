@@ -1,10 +1,12 @@
-import { Inbox, Mail, Menu } from '@mui/icons-material';
-import { Box, Button, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Menu, Power } from '@mui/icons-material';
+import { Button, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useState } from "react";
+import { useAuth } from '../../hooks/auth';
 
 
 export function Sidebar() {
   const [isSidebarShowing, setIsSideBarShowing] = useState(false)
+  const {signOut} = useAuth()
 
   const toggleSidebar =
     (open: boolean) =>
@@ -20,25 +22,7 @@ export function Sidebar() {
         setIsSideBarShowing(open);
       };
 
-  const list = () => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleSidebar(false)}
-      onKeyDown={toggleSidebar(false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <Inbox /> : <Mail />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+ 
 
   return (
     <>
@@ -48,7 +32,14 @@ export function Sidebar() {
         open={isSidebarShowing}
         onClose={toggleSidebar(false)}
       >
-        {list()}
+        <List>
+          <ListItem button key='logout' onClick={signOut}>
+            <ListItemIcon>
+              <Power/>
+            </ListItemIcon>
+            <ListItemText primary='Log out' />
+          </ListItem>
+      </List>
       </Drawer>
     </>
   )
