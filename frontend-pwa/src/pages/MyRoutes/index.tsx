@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import AppBar from '../../components/AppBar';
 
@@ -10,7 +10,18 @@ import PendingIcon from '@mui/icons-material/PendingActions';
 
 import { useNavigate } from "react-router-dom";
 
+export type Route = {
+  id: number
+  description: string
+  location: string
+}
+
 const MyRoutes: React.FC = () => {
+  const [routes, setRoutes] = useState<Route[]>([{
+    id: 34,
+    description: "Entrega de barris de soja",
+    location: "Goiânia - São Paulo"
+  }])
 
   const navigate = useNavigate()
 
@@ -18,71 +29,23 @@ const MyRoutes: React.FC = () => {
     <>
       <AppBar title="Meus trajetos" />
       <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <ListItem onClick={() => {
-          navigate('/routes/34', { replace: true })
-        }}>
-          <ListItemAvatar>
-            <Avatar>
-              <TruckIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Entrega de barris de soja"
-            secondary="Goiânia - São Paulo"
-          />
-        </ListItem>
-        <ListItem onClick={() => {
-          navigate('/routes/34', { replace: true })
-        }}>
-          <ListItemAvatar>
-            <Avatar>
-              <CheckIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Entrega de materiais de construção"
-            secondary="Goiânia - São Paulo"
-          />
-        </ListItem>
-        <ListItem onClick={() => {
-          navigate('/routes/34', { replace: true })
-        }}>
-          <ListItemAvatar>
-            <Avatar>
-              <PendingIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Entrega de materiais de construção"
-            secondary="Goiânia - São Paulo"
-          />
-        </ListItem>
-        <ListItem onClick={() => {
-          navigate('/routes/34', { replace: true })
-        }}>
-          <ListItemAvatar>
-            <Avatar>
-              <PendingIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Entrega de materiais de construção"
-            secondary="Goiânia - São Paulo"
-          />
-        </ListItem>
-        <ListItem onClick={() => {
-          navigate('/routes/34', { replace: true })
-        }}>
-          <ListItemAvatar>
-            <Avatar>
-              <PendingIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Entrega de materiais de construção"
-            secondary="Goiânia - São Paulo"
-          />
-        </ListItem>
+        {
+          routes.map(route => (
+            <ListItem onClick={() => {
+              navigate(`/routes/${route.id}`, { replace: true })
+            }}>
+              <ListItemAvatar>
+                <Avatar>
+                  <TruckIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={route.description}
+                secondary={route.location}
+              />
+            </ListItem>
+          ))
+        }
       </List>
     </>
 

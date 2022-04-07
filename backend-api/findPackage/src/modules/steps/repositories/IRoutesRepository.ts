@@ -7,5 +7,6 @@ interface IRoutesRepository {
     findByEnterpriseId(enterprise_id: string): Promise<Routes[]>;
     findById(id: string): Promise<Routes>;
     deleteById(id: string): Promise<void>;
+    findAll(): Promise<Routes[]>;
 }
 export { IRoutesRepository }

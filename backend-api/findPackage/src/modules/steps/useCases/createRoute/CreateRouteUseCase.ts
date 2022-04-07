@@ -11,7 +11,7 @@ class CreateRouteUseCase{
         @inject("RoutesRepository") private routesRepository:IRoutesRepository
     ){}
 
-    async execute({driver_id,enterprise_id}:ICreateRouteDTO){
+    async execute({driver_id,enterprise_id,initialDate,expectedEnd}:ICreateRouteDTO){
         const driverVerify = await this.usersRepository.findById(driver_id);
         if(!driverVerify){
             throw new AppError("Driver does not exist");
@@ -21,7 +21,9 @@ class CreateRouteUseCase{
         }
         const route =await this.routesRepository.create({
             driver_id,
-            enterprise_id
+            enterprise_id,
+            initialDate: new Date(initialDate),
+            expectedEnd
         })
 
         return route;

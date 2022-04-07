@@ -14,11 +14,13 @@ class RoutesRepository implements IRoutesRepository {
         driver_id,
         enterprise_id,
         id,
+        initialDate,
     }: ICreateRouteDTO): Promise<Routes> {
         const route = this.repository.create({
             driver_id,
             enterprise_id,
             id,
+            initialDate,
         });
         await this.repository.save(route);
         return route;
@@ -38,6 +40,11 @@ class RoutesRepository implements IRoutesRepository {
     }
     async deleteById(id: string): Promise<void> {
         await this.repository.delete(id);
+    }
+
+    async findAll(): Promise<Routes[]> {
+        const routeVerify = await this.repository.find();
+        return routeVerify;
     }
 }
 

@@ -8,7 +8,7 @@ import { IRoutesRepository } from "../../repositories/IRoutesRepository";
 class GetRouteByDriverIdUseCase{
     constructor(
         @inject("UsersRepository") private usersRepository : IUsersRepository,
-        @inject("RoutesRepository")private routesRepository:IRoutesRepository
+        @inject("RoutesRepository") private routesRepository:IRoutesRepository
     ){}
 
     async execute(driver_id: string){

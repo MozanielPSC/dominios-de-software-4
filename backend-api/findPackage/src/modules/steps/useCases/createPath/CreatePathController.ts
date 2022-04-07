@@ -4,9 +4,9 @@ import { CreatePathUseCase } from "./CreatePathUseCase";
 
 class CreatePathController {
     async handle(request: Request, response: Response) {
-        const { route_id, initLat, finalLat, initLong, finalLong, isInitial, isFinal } = request.body;
+        const { route_id, initLat, finalLat, initLong, finalLong, isInitial, isFinal,city_name,state } = request.body;
         const createPathUseCase = container.resolve(CreatePathUseCase);
-        const path = await createPathUseCase.execute({ route_id, initLat, finalLat, initLong, finalLong,isInitial, isFinal });
+        const path = await createPathUseCase.execute({ route_id, initLat, finalLat, initLong, finalLong,isInitial, isFinal,city_name,state });
         return response.status(200).json(path);
     }
 }
