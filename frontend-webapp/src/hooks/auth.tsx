@@ -29,6 +29,8 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
+  const [authed, setAuthed] = useState(false)
+
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@FindPackage: token');
     const user = localStorage.getItem('@FindPackage: user');
@@ -41,8 +43,6 @@ const AuthProvider: React.FC = ({ children }) => {
 
     return {} as AuthState;
   });
-
-  const [authed, setAuthed] = useState(false)
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('sessions', { email, password });
@@ -77,7 +77,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut, updateUser,authed }}
+      value={{ user: data.user, signIn, signOut, updateUser, authed }}
     >
       {children}
     </AuthContext.Provider>

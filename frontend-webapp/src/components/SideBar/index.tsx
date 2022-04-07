@@ -1,12 +1,17 @@
 import { Menu, Power } from '@mui/icons-material';
+import AltRouteIcon from '@mui/icons-material/AltRoute';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Button, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 
 
 export function Sidebar() {
   const [isSidebarShowing, setIsSideBarShowing] = useState(false)
   const {signOut} = useAuth()
+  const navigate = useNavigate()
 
   const toggleSidebar =
     (open: boolean) =>
@@ -33,11 +38,23 @@ export function Sidebar() {
         onClose={toggleSidebar(false)}
       >
         <List>
+          <ListItem button key='active-routes' onClick={() => navigate('/dashboard')}>
+            <ListItemIcon>
+              <TimelineIcon />
+            </ListItemIcon>
+            <ListItemText primary='Dashboard' />
+          </ListItem>
+          <ListItem button key='active-routes' onClick={() => navigate('/active-routes')}>
+            <ListItemIcon>
+              <AltRouteIcon />
+            </ListItemIcon>
+            <ListItemText primary='Rotas Ativas' />
+          </ListItem>
           <ListItem button key='logout' onClick={signOut}>
             <ListItemIcon>
-              <Power/>
+              <LogoutIcon />
             </ListItemIcon>
-            <ListItemText primary='Log out' />
+            <ListItemText primary='Sair' />
           </ListItem>
       </List>
       </Drawer>

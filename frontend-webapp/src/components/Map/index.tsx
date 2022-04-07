@@ -15,29 +15,40 @@ const markerIcon = LeafLet.icon({
   iconSize: [40, 40]
 })
 
-
 interface LocationInfo {
   countryName: string;
   city: string;
   principalSubdivision: string;
+  latitude: number;
+  longitude: number;
 }
 
-
 function Map() {
-  const [initialPosition, setInitialPosition] = useState<[number, number]>([-16.6111694, -49.2713811]);
+  const [initialPosition, setInitialPosition] = useState<[number, number]>([0,0]);
   const [markerPosition, setMarkerPosition] = useState<[number, number]>([0, 0]);
-  const { setLocationInfo } = useLocationInfo();
+  const { location, setLocationInfo } = useLocationInfo();
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const { latitude, longitude } = position.coords;
-      setInitialPosition([latitude, longitude]);
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    }
 
-    });
+    function loadPosition(position: { coords: { latitude: number, longitude: number } }) {
+      const { latitude, longitude } = position.coords;
+
+      setInitialPosition([latitude, longitude]);
+    }
+
+    function handleError(err: { code: number, message: string }) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+    }
+
+    navigator.geolocation.getCurrentPosition(loadPosition, handleError, options);
   }, []);
 
   const LocationMarker = () => {
-
     const map = useMapEvents({
       click(e) {
         setMarkerPosition([
@@ -67,7 +78,7 @@ function Map() {
       {
         initialPosition[0] !== 0 ? (
           <MapContainer
-            center={markerPosition || initialPosition}
+            center={initialPosition || markerPosition}
             zoom={12}
             style={{
               width: '100%',
