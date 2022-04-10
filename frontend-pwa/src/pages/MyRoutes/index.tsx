@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { api } from '../../service/api';
 import { useAuth } from '../../hooks/auth';
 
+import {  toast } from 'react-toastify';
+
 export type Path = {
   id: string;
   city_initial: string;
@@ -63,9 +65,8 @@ const MyRoutes: React.FC = () => {
             })
           }
           setEnrichedRoutes(enrichedRoutes)
-          console.log(enrichedRoutes)
       } catch (error) {
-          console.log(error);
+        toast.error('Ocorreu um erro ao carregar suas rotas, tente mais tarde novamente.')
       } finally {
           setLoading(false);
       }
@@ -96,10 +97,9 @@ const MyRoutes: React.FC = () => {
       <AppBar title="Meus trajetos" />
       <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {enrichedRoutes.map((route: EnrichedRoute) => {
-            console.log(route)
             return (
               <ListItem onClick={() => {
-                navigate(`/routes/${route.id}`, { replace: true })
+                navigate(`/routes/${route.id}`)
               }}>
                 <ListItemAvatar>
                   <Avatar>

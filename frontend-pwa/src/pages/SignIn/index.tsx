@@ -1,8 +1,10 @@
-import { Copyright, LockClockOutlined } from "@mui/icons-material";
-import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Paper, TextField, Typography } from "@mui/material";
+import {  LockClockOutlined } from "@mui/icons-material";
+import { Avatar, Box, Button, CssBaseline, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+
+import {  toast } from 'react-toastify';
 
 export function SignIn(){
   const navigate = useNavigate();
@@ -12,11 +14,16 @@ export function SignIn(){
   const [password, setPassword] = useState('')
 
   const handleSubmit = useCallback(async () => {
-    await signIn({
-      email: email,
-      password: password
-    })
-    navigate('/my-routes')
+    try {
+      await signIn({
+        email: email,
+        password: password
+      })
+      navigate('/my-routes')
+    } catch(e) {
+      toast.error('Erro ao efetuar login, confira seu email e senha!')
+    }
+
   }, [signIn, email, password, navigate])
 
   return(

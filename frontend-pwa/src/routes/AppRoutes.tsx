@@ -4,6 +4,7 @@ import MyRoutes from "../pages/MyRoutes";
 import RouteDetail from "../pages/RouteDetail";
 import { SignIn } from "../pages/SignIn";
 import { ProtectedRoute } from "./ProtectedRoutes";
+import { RedirectRoute } from "./RedirectRoute";
 
 export function AppRoutes() {
   const { user } = useAuth()
@@ -11,7 +12,14 @@ export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<SignIn />} />
+        <Route
+          index
+          element={
+            <RedirectRoute user={user}>
+              <SignIn />
+            </RedirectRoute>
+          }
+        />
         <Route
           path="/my-routes"
           element={
@@ -26,6 +34,12 @@ export function AppRoutes() {
             <ProtectedRoute user={user}>
               <RouteDetail />
             </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={
+            <RedirectRoute user={user}>
+              <SignIn />
+            </RedirectRoute>
           }
         />
       </Routes>

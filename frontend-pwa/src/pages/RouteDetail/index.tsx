@@ -22,7 +22,10 @@ import LocationIcon from '@mui/icons-material/LocationOn';
 
 import * as S from './styles'
 import { api } from '../../service/api';
+
 import { generateMapsUrl } from '../../utils/maps';
+
+import {  toast } from 'react-toastify';
 
 export type Path = {
   id: string;
@@ -83,13 +86,14 @@ const RouteDetail: React.FC = () => {
       setShowCheckpointModal(false)
       getRoute()
     })
-    .catch((e) => console.log(e))
+    .catch((e) => {
+      toast.error('Ocorreu um erro desconhecido, tente mais tarde novamente')
+    })
 
   }
 
   const navigateToMap = () => {
     const url = generateMapsUrl(route.paths ? route.paths : [])
-    console.log(url)
     window.location.href = url
   }
 
@@ -99,7 +103,6 @@ const RouteDetail: React.FC = () => {
           api.get<Route>(`/routes/${params.id}`),
           api.get<Path[]>(`paths/byRoute/${params.id}`)
         ]);
-        console.log(pathResponse.data)
         setRoute({
           ...routeResponse.data,
           paths: orderPaths(pathResponse.data)
@@ -142,7 +145,7 @@ const RouteDetail: React.FC = () => {
 
   return (
     <>
-      <AppBar title="Detalhes do trajeto" />
+      <AppBar back backUrl="/my-routes" title="Detalhes do trajeto" />
       <S.Content>
         <S.Title>STATUS</S.Title>
         <S.Text>
