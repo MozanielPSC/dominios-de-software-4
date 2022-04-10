@@ -88,7 +88,9 @@ const RouteDetail: React.FC = () => {
   }
 
   const navigateToMap = () => {
-    window.location.href = generateMapsUrl(route.paths ? route.paths : [])
+    const url = generateMapsUrl(route.paths ? route.paths : [])
+    console.log(url)
+    window.location.href = url
   }
 
   const getRoute = useCallback(async () => {
@@ -180,6 +182,14 @@ const RouteDetail: React.FC = () => {
          variant="contained" color="success" sx={{ mx: '8px', my: '8px'}} >
           {route.started ? 'Abrir rota no mapa' : 'Iniciar rota'}
         </Button>
+        {!route.started && (
+          <Button onClick={() => {
+            navigateToMap()
+          }}
+           variant="contained" color="primary" sx={{ mx: '8px', my: '8px'}} >
+            Abrir rota no mapa
+          </Button>
+        )}
         {route.started && route?.paths?.filter(path => !path.isComplete).length > 0 && (
             <Button onClick={() => {
               setShowCheckpointModal(true)

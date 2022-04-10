@@ -3,7 +3,7 @@
 
 export const generateMapsUrl = (routes: any[]) => {
   let url = 'https://www.google.com/maps/dir/?api=1'
-  url += `&origin=${routes[0].initLat},${routes[1].initLong}`
+  url += `&origin=${routes[0].initLat},${routes[0].initLong}`
   url += `&destination=${routes[routes.length - 1].initLat}, ${routes[routes.length - 1].initLong}&travelmode=driving`
 
   routes.pop()
