@@ -5,5 +5,6 @@ interface ICreateRouteDTO {
     initialDate: Date;
     expectedEnd?:Date;
     isFinished?:boolean;
+    started?: boolean
 }
 export { ICreateRouteDTO }

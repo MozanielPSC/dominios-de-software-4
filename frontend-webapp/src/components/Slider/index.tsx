@@ -8,13 +8,13 @@ export default function EmotionCSS() {
       <Slider defaultValue={30} />
       <Slider
         defaultValue={30}
-        css={css`
-          color: #20b2aa;
+        // css={css`
+        //   color: #20b2aa;
 
-          :hover {
-            color: #2e8b57;
-          }
-        `}
+        //   :hover {
+        //     color: #2e8b57;
+        //   }
+        // `}
       />
     </Box>
   );

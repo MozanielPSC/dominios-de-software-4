@@ -19,7 +19,7 @@ class UpdateRouteUseCase {
         route.initialDate = initialDate;
         route.expectedEnd = expectedEnd;
         route.isFinished = isFinished;
-      const response =  await this.routesRepository.create(route);
+      const response =  await this.routesRepository.save(route);
       return response;
 
     }

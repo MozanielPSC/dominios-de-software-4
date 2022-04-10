@@ -14,6 +14,7 @@ class Paths {
     @ManyToOne(() => Routes)
     @JoinColumn({ name: "route_id" })
     route_id: string;
+
     @Column()
     initLat: number;
     @Column()

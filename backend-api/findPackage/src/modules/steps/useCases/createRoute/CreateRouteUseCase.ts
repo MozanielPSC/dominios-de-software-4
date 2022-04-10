@@ -19,9 +19,10 @@ class CreateRouteUseCase{
         if(!driverVerify.isDriver){
             throw new AppError("Driver is not a driver");
         }
-        const route =await this.routesRepository.create({
+        const route = await this.routesRepository.create({
             driver_id,
             enterprise_id,
+            started: false,
             initialDate: new Date(initialDate),
             expectedEnd
         })

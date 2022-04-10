@@ -46,6 +46,11 @@ class RoutesRepository implements IRoutesRepository {
         const routeVerify = await this.repository.find();
         return routeVerify;
     }
+
+    async save(route: Routes): Promise<Routes> {
+        const routeVerify = await this.repository.save(route);
+        return routeVerify;
+    }
 }
 
 export { RoutesRepository };

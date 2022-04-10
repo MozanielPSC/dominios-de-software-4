@@ -43,7 +43,12 @@ class PathsRepository implements IPathsRepository {
   }
 
   async findByRouteId(route_id: string): Promise<Paths[]> {
-    const pathVerify = await this.repository.find({ route_id });
+    const pathVerify = await this.repository.find({ where: {
+      route_id
+    },
+    order:{
+      created_at: 'ASC'
+    }});
     return pathVerify;
   }
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import multer from "multer";
+
 import { CreatePathController } from "../../../../modules/steps/useCases/createPath/CreatePathController";
 import { DeletePathController } from "../../../../modules/steps/useCases/deletePath/DeletePathController";
 import { GetPathsByRouteIdController } from "../../../../modules/steps/useCases/getPathsByRouteId/GetPathsByRouteIdController";

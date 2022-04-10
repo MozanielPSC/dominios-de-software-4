@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { api } from '../service';
+import { api } from '../service/api';
+
 import { HeadersDefaults } from 'axios'
 
 interface User {
@@ -37,8 +38,8 @@ const AuthProvider: React.FC = ({ children }) => {
   const [authed, setAuthed] = useState(false)
 
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@FindPackage: token');
-    const user = localStorage.getItem('@FindPackage: user');
+    const token = localStorage.getItem('@FindPackageApp: token');
+    const user = localStorage.getItem('@FindPackageApp: user');
 
     if (token && user) {
       api.defaults.headers = {
@@ -56,8 +57,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
     const { token, user } = response.data;
 
-    localStorage.setItem('@FindPackage: token', token);
-    localStorage.setItem('@FindPackage: user', JSON.stringify(user));
+    localStorage.setItem('@FindPackageApp: token', token);
+    localStorage.setItem('@FindPackageApp: user', JSON.stringify(user));
 
     api.defaults.headers = {
       authorization: `Bearer ${token}`
@@ -67,15 +68,15 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signOut = useCallback(() => {
-    localStorage.removeItem('@FindPackage: token');
-    localStorage.removeItem('@FindPackage: user');
+    localStorage.removeItem('@FindPackageApp: token');
+    localStorage.removeItem('@FindPackageApp: user');
     setAuthed(false)
     setData({} as AuthState);
   }, []);
 
   const updateUser = useCallback(
     (user: User) => {
-      localStorage.setItem('@FindPackage: user', JSON.stringify(user));
+      localStorage.setItem('@FindPackageApp: user', JSON.stringify(user));
       setData({
         token: data.token,
         user,

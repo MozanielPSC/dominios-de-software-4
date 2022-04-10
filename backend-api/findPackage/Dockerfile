@@ -1,7 +1,7 @@
-FROM node 
+FROM mhart/alpine-node:16.4.2
 WORKDIR /usr/app
 COPY package.json ./
-RUN npm install
 COPY . .
+RUN yarn
 EXPOSE 3333
-CMD ["npm","run","dev"]
+CMD ["yarn","run", "dev"]

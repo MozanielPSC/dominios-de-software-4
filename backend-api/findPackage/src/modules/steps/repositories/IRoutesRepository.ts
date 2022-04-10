@@ -8,5 +8,6 @@ interface IRoutesRepository {
     findById(id: string): Promise<Routes>;
     deleteById(id: string): Promise<void>;
     findAll(): Promise<Routes[]>;
+    save(route: Routes): Promise<Routes>;
 }
 export { IRoutesRepository }

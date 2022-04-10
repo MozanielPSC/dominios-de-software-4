@@ -1,4 +1,3 @@
-import { query } from "express";
 import {MigrationInterface, QueryRunner, TableColumn} from "typeorm";
 
 export class RouteDate1648445749529 implements MigrationInterface {
