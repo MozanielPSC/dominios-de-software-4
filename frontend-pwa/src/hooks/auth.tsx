@@ -63,6 +63,7 @@ const AuthProvider: React.FC = ({ children }) => {
     api.defaults.headers = {
       authorization: `Bearer ${token}`
     } as CommonHeaderProperties
+
     setAuthed(true)
     setData({ token, user });
   }, []);

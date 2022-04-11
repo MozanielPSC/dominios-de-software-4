@@ -41,6 +41,7 @@ export type EnrichedRoute = Route & {
 
 const MyRoutes: React.FC = () => {
   const [loading, setLoading] = useState(true);
+
   const [enrichedRoutes, setEnrichedRoutes] = useState<EnrichedRoute[]>([]);
   const { user } = useAuth()
 
@@ -51,13 +52,11 @@ const MyRoutes: React.FC = () => {
   }, [])
 
   const getRoutes = useCallback(async () => {
-
       try {
           const response = await api.get<Route[]>(`/routes/byDriver/${user.id}`)
           const enrichedRoutes = []
           for(const route of response.data) {
             const paths = await getPaths(route.id)
-            console.log(paths)
             const orderedPaths = orderPaths(paths.data)
             enrichedRoutes.push({
               ...route,
