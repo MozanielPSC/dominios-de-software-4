@@ -21,7 +21,8 @@ class UpdatePathUseCase {
         @inject("PathsRepository") private pathsRepository: IPathsRepository
     ) { }
 
-    async execute({ initLat,
+    async execute({ 
+        initLat,
         finalLat,
         initLong,
         finalLong,
