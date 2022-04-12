@@ -9,6 +9,7 @@ import { IRoutesRepository } from "../../src/modules/steps/repositories/IRoutesR
 import { CreatePathUseCase } from "../../src/modules/steps/useCases/createPath/CreatePathUseCase";
 
 class FakeRouteRepository implements IRoutesRepository {
+    
     async create(data: ICreateRouteDTO): Promise<Routes> {
         throw new Error('Not implemented')
     }
@@ -84,7 +85,7 @@ describe('CreatePath', () => {
 
         const result = await usecase.execute(request)
       
-        expect(result).toEqual(request)
+        expect(result).toEqual(request);
     })
   
 })

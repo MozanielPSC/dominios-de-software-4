@@ -33,7 +33,7 @@ class FakeRouteRepository implements IRoutesRepository {
 }
 
 class FakeUserRepository implements IUsersRepository {
-    async create(data:ICreateUsersDTO):Promise<void> {
+    async create(data:ICreateUsersDTO):Promise<User> {
         throw new Error('Not implemented')
     }
     async findByEmail(email:string):Promise<User> {

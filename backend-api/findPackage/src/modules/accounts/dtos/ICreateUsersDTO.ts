@@ -8,6 +8,8 @@ interface ICreateUsersDTO {
   avatar?:string;
   following?:User[];
   isAdmin?:boolean;
+  isDriver?:boolean;
+  isEnterprise?:boolean;
 }
 
 export{ICreateUsersDTO};
