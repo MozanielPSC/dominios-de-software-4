@@ -63,6 +63,7 @@ const MyRoutes: React.FC = () => {
               paths: orderedPaths
             })
           }
+          console.log(enrichedRoutes)
           setEnrichedRoutes(enrichedRoutes)
       } catch (error) {
         toast.error('Ocorreu um erro ao carregar suas rotas, tente mais tarde novamente.')
@@ -106,7 +107,7 @@ const MyRoutes: React.FC = () => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  secondary={`${route.paths[0].city_name} - ${route.paths[route.paths.length - 1].city_name}`}
+                  secondary={`${route.paths[0]?.city_name} - ${route.paths[route.paths.length - 1]?.city_name}`}
                 />
               </ListItem>
             )
