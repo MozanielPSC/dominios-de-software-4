@@ -12,6 +12,7 @@ import { api } from '../../service/api';
 import { useAuth } from '../../hooks/auth';
 
 import {  toast } from 'react-toastify';
+import { ifError } from 'assert';
 
 export type Path = {
   id: string;
@@ -33,6 +34,7 @@ export type Route = {
   initialDate: Date;
   expectedEnd?: Date;
   isFinished: boolean;
+  started: boolean
 }
 
 export type EnrichedRoute = Route & {
@@ -92,6 +94,16 @@ const MyRoutes: React.FC = () => {
     getRoutes()
   }, [getRoutes])
 
+  const getColor = (route: EnrichedRoute) => {
+    if(route.isFinished) {
+      return 'error'
+    }
+    if(route.started) {
+      return 'primary'
+    }
+    return 'success';
+  }
+
   return (
     <>
       <AppBar title="Meus trajetos" />
@@ -103,7 +115,7 @@ const MyRoutes: React.FC = () => {
               }}>
                 <ListItemAvatar>
                   <Avatar>
-                    <TruckIcon />
+                    <TruckIcon color={getColor(route)} />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText

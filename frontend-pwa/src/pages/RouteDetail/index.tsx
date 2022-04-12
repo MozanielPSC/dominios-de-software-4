@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { format } from 'date-fns'
+
 import AppBar from '../../components/AppBar';
 
 import Timeline from '@mui/lab/Timeline';
@@ -45,7 +47,7 @@ export type Route = {
   id: string;
   driver_id: string;
   enterprise_id: string;
-  initialDate: Date;
+  initialDate: string;
   expectedEnd?: Date;
   isFinished: boolean;
   started: boolean
@@ -143,6 +145,15 @@ const RouteDetail: React.FC = () => {
     }
   }
 
+  const getDate = (route: EnrichedRoute) => {
+    const stringDate = route?.initialDate?.split('T')[0].split('-')
+    if(stringDate) {
+      const [year, month, day] = stringDate
+      return `${day}/${month}/${year}`
+    }
+    return 'Não informado'
+  }
+
   return (
     <>
       <AppBar back backUrl="/my-routes" title="Detalhes do trajeto" />
@@ -154,6 +165,8 @@ const RouteDetail: React.FC = () => {
         <S.Title>TRAJETO</S.Title>
         <S.Text>{route.paths && route.paths?.length > 0 ?
           `${route.paths[0].city_name} - ${route.paths[route.paths.length - 1].city_name}` : null}</S.Text>
+        <S.Title>DATA DE INÍCIO</S.Title>
+        <S.Text>{getDate(route)}</S.Text>
         <Timeline position="alternate">
           {route.paths?.map((path: Path) => {
             return (
