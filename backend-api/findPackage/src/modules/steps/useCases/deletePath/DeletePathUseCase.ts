@@ -9,7 +9,7 @@ class DeletePathUseCase {
     ) { }
 
     async execute(path_id: string) {
-        const pathVerify = this.pathsRepository.findById(path_id);
+        const pathVerify = await this.pathsRepository.findById(path_id);
         if (!pathVerify) {
             throw new AppError("Path does not exist");
         }

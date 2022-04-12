@@ -10,7 +10,7 @@ class DeleteRouteUseCase {
     async execute(route_id: string) {
         const repositoryVerify = await this.routesRepository.findById(route_id);
         if (!repositoryVerify) {
-            throw new AppError("Repository does not exist");
+            throw new AppError("Route does not exist");
         }
         await this.routesRepository.deleteById(route_id);
     }
